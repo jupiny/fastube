@@ -2,7 +2,7 @@
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 import os
 from .base import BASE_DIR
-from .base import PROJECT_ROOT_DIR 
+from .base import PROJECT_ROOT_DIR
 
 
 STATIC_URL = '/static/'
