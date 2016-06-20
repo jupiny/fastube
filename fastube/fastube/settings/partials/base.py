@@ -59,3 +59,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fastube.wsgi.application'
+
+# Auth
+AUTH_USER_MODEL = 'users.User'
