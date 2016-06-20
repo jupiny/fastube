@@ -45,7 +45,9 @@ ROOT_URLCONF = 'fastube.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "fastube", "templates")
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -61,4 +63,4 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fastube.wsgi.application'
 
 # Auth
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.models.User'
