@@ -12,7 +12,7 @@ class SignupView(View):
             "users/signup.html",
             context={},
         )
-        
+
     def post(self, request, *args, **kwargs):
         username = request.POST.get("username")
         password = request.POST.get("password")
