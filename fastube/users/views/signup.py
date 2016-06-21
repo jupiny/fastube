@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import View
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
@@ -22,6 +23,11 @@ class SignupView(View):
             username=username,
             password=password,
             phonenumber=phonenumber,
+        )
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            "성공적으로 회원가입 되었습니다.",
         )
 
         return redirect(reverse("login"))
