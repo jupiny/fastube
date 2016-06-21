@@ -6,9 +6,9 @@
     <section>
         <form action="{% url "users:signup" %}" method="POST">
             {% csrf_token %}
-            <input type="text" name="username" placehoder="username">
-            <input type="password" name="password" placehoder="password">
-            <input type="text" name="phonenumber" placehoder="phonenumber">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <input type="text" name="phonenumber" placeholder="phonenumber">
             <input type="submit" value="signup">
         </form>
     </section>
