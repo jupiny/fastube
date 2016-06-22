@@ -8,5 +8,6 @@ install:
 # command to run tests
 script:
   - pep8 .
+  - python fastube/manage.py test users posts
 notifications:
   slack: jupiny:NrZkCoj1a9fQhGQaVHPHeAax
