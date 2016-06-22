@@ -16,6 +16,11 @@ class Post(models.Model):
         null=True,
     )
 
+    tumbnail_image = models.ImageField(
+        blank=True,
+        null=True,
+    )
+
     video_original_title = models.CharField(
         max_length=256,
         blank=True,
@@ -33,6 +38,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_youtube_thumbnail_image_url(self):
+        from posts.utils.youtube import get_youtube_thumbnail_image_url as\
+                get_youtube_thumbnail_image_url_from_video_id
+        return get_youtube_thumbnail_image_url_from_video_id(self.video_id)
+    youtube_thumbnail_image_url = property(get_youtube_thumbnail_image_url)
 
     def get_youtube_original_url(self):
         from posts.utils.youtube import get_youtube_original_url as get_youtube_original_url_from_video_id
