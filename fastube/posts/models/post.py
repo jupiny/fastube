@@ -1,5 +1,6 @@
 from users.models import User
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Post(models.Model):
@@ -8,6 +9,11 @@ class Post(models.Model):
 
     video_id = models.CharField(
        max_length=16,
+    )
+    hash_id = models.CharField(
+        max_length=8,
+        blank=True,
+        null=True,
     )
 
     video_original_title = models.CharField(
@@ -37,3 +43,11 @@ class Post(models.Model):
         from posts.utils.youtube import get_youtube_embed_url as get_youtube_embed_url_from_video_id
         return get_youtube_embed_url_from_video_id(self.video_id)
     youtube_embed_url = property(get_youtube_embed_url)
+
+    def get_absolute_url(self):
+        return reverse(
+            "posts:detail",
+            kwargs={
+                "slug": self.hash_id,
+            },
+        )
