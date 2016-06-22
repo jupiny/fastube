@@ -16,7 +16,7 @@ class Post(models.Model):
         null=True,
     )
 
-    tumbnail_image = models.ImageField(
+    thumbnail_image = models.ImageField(
         blank=True,
         null=True,
     )
@@ -38,6 +38,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_thumbnail_image_url(self):
+        if self.thumbnail_image:
+            return self.thumbnail_image.url
+        return self.youtube_thumbnail_image_url
+    thumbnail_image_url = property(get_thumbnail_image_url)
 
     def get_youtube_thumbnail_image_url(self):
         from posts.utils.youtube import get_youtube_thumbnail_image_url as\
