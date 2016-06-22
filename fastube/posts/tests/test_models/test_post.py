@@ -14,7 +14,7 @@ class PostModelTestCase(TestCase):
             password="test_password",
         )
 
-        self.post_video_id = "fastube"
+        self.post_video_id = "fV89HM8kwro"
 
         # Create a post
         self.post = self.user.post_set.create(
