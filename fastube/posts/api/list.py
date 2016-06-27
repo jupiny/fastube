@@ -1,5 +1,3 @@
-from django.http.response import HttpResponse
-
 from rest_framework.generics import ListAPIView
 
 from posts.models import Post
