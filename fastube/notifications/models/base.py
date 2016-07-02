@@ -7,7 +7,7 @@ class BaseNotification(models.Model):
         max_length=128,
     )
 
-    reciever = models.CharField(
+    receiver = models.CharField(
         max_length=128,
     )
 
@@ -23,3 +23,6 @@ class BaseNotification(models.Model):
 
     class Meta:
         abstract = True
+
+    def send_notification(self):
+        raise NotImplementedError
