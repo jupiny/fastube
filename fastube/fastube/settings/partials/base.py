@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'users',
     'posts',
     'tags',
+    'notifications',
 ]
 
 MIDDLEWARE_CLASSES = [
