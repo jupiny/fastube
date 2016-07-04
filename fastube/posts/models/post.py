@@ -1,5 +1,6 @@
 from users.models import User
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Post(models.Model):
@@ -8,6 +9,16 @@ class Post(models.Model):
 
     video_id = models.CharField(
        max_length=16,
+    )
+    hash_id = models.CharField(
+        max_length=8,
+        blank=True,
+        null=True,
+    )
+
+    thumbnail_image = models.ImageField(
+        blank=True,
+        null=True,
     )
 
     video_original_title = models.CharField(
@@ -25,19 +36,41 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    like_user_set = models.ManyToManyField(
+        User,
+        related_name="like_post_set",
+        through="Like",
+    )
+
     def __str__(self):
         return self.title
 
-    def get_youtube_original_url(self):
-        return "https://www.youtube.com/watch?v={video_id}".format(
-            video_id=self.video_id,
-        )
+    def get_thumbnail_image_url(self):
+        if self.thumbnail_image:
+            return self.thumbnail_image.url
+        return self.youtube_thumbnail_image_url
+    thumbnail_image_url = property(get_thumbnail_image_url)
 
+    def get_youtube_thumbnail_image_url(self):
+        from posts.utils.youtube import get_youtube_thumbnail_image_url as\
+                get_youtube_thumbnail_image_url_from_video_id
+        return get_youtube_thumbnail_image_url_from_video_id(self.video_id)
+    youtube_thumbnail_image_url = property(get_youtube_thumbnail_image_url)
+
+    def get_youtube_original_url(self):
+        from posts.utils.youtube import get_youtube_original_url as get_youtube_original_url_from_video_id
+        return get_youtube_original_url_from_video_id(self.video_id)
     youtube_original_url = property(get_youtube_original_url)
 
     def get_youtube_embed_url(self):
-        return "https://www.youtube.com/embed/{video_id}".format(
-            video_id=self.video_id,
-        )
-
+        from posts.utils.youtube import get_youtube_embed_url as get_youtube_embed_url_from_video_id
+        return get_youtube_embed_url_from_video_id(self.video_id)
     youtube_embed_url = property(get_youtube_embed_url)
+
+    def get_absolute_url(self):
+        return reverse(
+            "posts:detail",
+            kwargs={
+                "slug": self.hash_id,
+            },
+        )
