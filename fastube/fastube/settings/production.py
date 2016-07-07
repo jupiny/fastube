@@ -8,7 +8,7 @@ ALLOWED_HOSTS = [
 ]
 
 
-TATICFILES_STORAGE = 'fastube.storage.S3PipelineCachedStorage'
+STATICFILES_STORAGE = 'fastube.storage.S3PipelineCachedStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
