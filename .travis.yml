@@ -16,7 +16,7 @@ before_script:
 script:
   - pep8 .
   - python fastube/manage.py test users posts
-  - coverage run --source=fastube manage.py test
+  - coverage run manage.py test
 notifications:
   slack: jupiny:NrZkCoj1a9fQhGQaVHPHeAax
 after_success: coveralls
