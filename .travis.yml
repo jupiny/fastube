@@ -9,7 +9,6 @@ services:
 # command to install dependencies
 install: 
   - pip install -r requirements/development.txt
-  - pip install coveralls
 before_script:
   - psql -c 'CREATE DATABASE fastube;' -U postgres
 # command to run tests
